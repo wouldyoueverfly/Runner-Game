@@ -1,0 +1,99 @@
+name: "level"
+instances {
+  id: "hero"
+  prototype: "/hero/hero.go"
+  position {
+    x: 169.0
+    y: 45.0
+    z: 0.1
+  }
+}
+instances {
+  id: "background"
+  prototype: "/level/background/background.go"
+}
+instances {
+  id: "large_planets"
+  prototype: "/level/background/large_planets.go"
+  position {
+    x: -278.0
+    y: 136.0
+  }
+}
+instances {
+  id: "large_planets1"
+  prototype: "/level/background/large_planets.go"
+  position {
+    x: 3776.0
+    y: -12.0
+  }
+}
+instances {
+  id: "small_planets"
+  prototype: "/level/background/small_planets.go"
+  position {
+    x: 1785.0
+    y: 215.0
+  }
+}
+instances {
+  id: "small_planets1"
+  prototype: "/level/background/small_planets.go"
+  position {
+    x: 201.0
+    y: 13.0
+  }
+}
+collection_instances {
+  id: "ground"
+  collection: "/level/ground.collection"
+  position {
+    z: 1.0
+  }
+}
+scale_along_z: 0
+embedded_instances {
+  id: "controller"
+  data: "components {\n"
+  "  id: \"controller\"\n"
+  "  component: \"/level/controller.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"platform_factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/level/objects/platform.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"platform_long_factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/level/objects/platform_long.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"lives_factory\"\n"
+  "  type: \"factory\"\n"
+  "  data: \"prototype: \\\"/level/lives.go\\\"\\n"
+  "\"\n"
+  "}\n"
+  ""
+}
+embedded_instances {
+  id: "score"
+  data: "components {\n"
+  "  id: \"score\"\n"
+  "  component: \"/level/score.gui\"\n"
+  "}\n"
+  ""
+  position {
+    z: 1.0
+  }
+}
+embedded_instances {
+  id: "death_fx"
+  data: "components {\n"
+  "  id: \"death\"\n"
+  "  component: \"/level/death.particlefx\"\n"
+  "}\n"
+  ""
+}

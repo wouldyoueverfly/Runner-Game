@@ -1,0 +1,22 @@
+script: "/level/score.gui_script"
+fonts {
+  name: "Roboto-Italic"
+  font: "/fonts/Roboto-Italic.font"
+}
+nodes {
+  position {
+    x: 160.0
+    y: 648.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "SCORE: 0"
+  font: "Roboto-Italic"
+  id: "score"
+  inherit_alpha: true
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT

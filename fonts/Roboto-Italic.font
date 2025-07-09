@@ -1,0 +1,4 @@
+font: "/fonts/Roboto-Italic-VariableFont_wdth,wght.ttf"
+material: "/builtins/fonts/font.material"
+size: 30
+characters: " !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"

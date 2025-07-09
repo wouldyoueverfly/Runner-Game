@@ -1,0 +1,18 @@
+images {
+  image: "/level/background/images/bg.png"
+  pivot_x: 0.0
+  pivot_y: 1.0
+}
+images {
+  image: "/level/background/images/earthlike_planet.png"
+}
+images {
+  image: "/level/background/images/gas_planet.png"
+}
+images {
+  image: "/level/background/images/ice_planet.png"
+}
+images {
+  image: "/level/background/images/ring_planet.png"
+}
+extrude_borders: 2

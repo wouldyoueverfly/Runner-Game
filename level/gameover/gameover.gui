@@ -1,0 +1,51 @@
+fonts {
+  name: "game_over_font"
+  font: "/fonts/game_over_font.font"
+}
+fonts {
+  name: "restart_font"
+  font: "/fonts/restart_font.font"
+}
+nodes {
+  position {
+    x: 640.0
+    y: 360.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Game Over"
+  font: "game_over_font"
+  id: "gameover"
+  inherit_alpha: true
+}
+nodes {
+  position {
+    x: 640.0
+    y: 238.0
+  }
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_BOX
+  id: "box"
+  inherit_alpha: true
+  alpha: 0.0
+  size_mode: SIZE_MODE_AUTO
+}
+nodes {
+  size {
+    x: 200.0
+    y: 100.0
+  }
+  type: TYPE_TEXT
+  text: "Restart"
+  font: "restart_font"
+  id: "restart"
+  parent: "box"
+}
+material: "/builtins/materials/gui.material"
+adjust_reference: ADJUST_REFERENCE_PARENT
