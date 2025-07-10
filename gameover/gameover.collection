@@ -1,0 +1,14 @@
+name: "gameover"
+instances {
+  id: "background"
+  prototype: "/level/background/background.go"
+}
+scale_along_z: 0
+embedded_instances {
+  id: "gameover"
+  data: "components {\n"
+  "  id: \"gameover\"\n"
+  "  component: \"/gameover/gameover.gui\"\n"
+  "}\n"
+  ""
+}

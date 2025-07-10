@@ -1,3 +1,4 @@
+script: "/start/start.gui_script"
 fonts {
   name: "game_over_font"
   font: "/fonts/game_over_font.font"
@@ -16,36 +17,10 @@ nodes {
     y: 100.0
   }
   type: TYPE_TEXT
-  text: "Game Over"
+  text: "Start Game"
   font: "game_over_font"
-  id: "gameover"
+  id: "start"
   inherit_alpha: true
-}
-nodes {
-  position {
-    x: 640.0
-    y: 238.0
-  }
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  type: TYPE_BOX
-  id: "box"
-  inherit_alpha: true
-  alpha: 0.0
-  size_mode: SIZE_MODE_AUTO
-}
-nodes {
-  size {
-    x: 200.0
-    y: 100.0
-  }
-  type: TYPE_TEXT
-  text: "Restart"
-  font: "restart_font"
-  id: "restart"
-  parent: "box"
 }
 material: "/builtins/materials/gui.material"
 adjust_reference: ADJUST_REFERENCE_PARENT

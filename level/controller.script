@@ -43,7 +43,7 @@ function on_message(self, message_id, message, sender)
 			msg.post(heart_url, "disable")
 			table.remove(self.lives, last)
 		else
-			-- msg.post
+			msg.post("main:/loader#loader", "game_over")
 		end
 		
 		for i,p in ipairs(self.spawns) do

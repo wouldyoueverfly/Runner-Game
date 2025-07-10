@@ -16,7 +16,7 @@ instances {
   id: "large_planets"
   prototype: "/level/background/large_planets.go"
   position {
-    x: -278.0
+    x: 1174.0
     y: 136.0
   }
 }
@@ -24,7 +24,7 @@ instances {
   id: "large_planets1"
   prototype: "/level/background/large_planets.go"
   position {
-    x: 3776.0
+    x: 5228.0
     y: -12.0
   }
 }
@@ -32,7 +32,7 @@ instances {
   id: "small_planets"
   prototype: "/level/background/small_planets.go"
   position {
-    x: 1785.0
+    x: 3336.0
     y: 215.0
   }
 }
@@ -40,7 +40,7 @@ instances {
   id: "small_planets1"
   prototype: "/level/background/small_planets.go"
   position {
-    x: 201.0
+    x: 1752.0
     y: 13.0
   }
 }

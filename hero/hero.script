@@ -1,3 +1,5 @@
+--@diagnostic disable:  undefined-global, undefined-field
+
 local gravity = -20
 local jump_takeoff_speed = 900
 local timer_enabled = true
@@ -6,8 +8,7 @@ local reset_timer = 1 / frequency
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
-
-	
+	self.velocity = vmath.vector3(0,0,0)
 	self.position = go.get_position()
 	msg.post("#", "reset")
 end
@@ -39,7 +40,7 @@ function update(self, dt)
 	end
 	if reset_timer < 0 then
 		
-		msg.post("/level/score#score", "reset_score")
+		msg.post("level:/score#score", "reset_score")
 		self.velocity = vmath.vector3(0,0,0)
 		self.correction = vmath.vector3()
 		self.ground_contact = false
@@ -90,18 +91,18 @@ function on_message(self, message_id, message, sender)
 		
 		if message.group == hash("danger") then
 			go.set_position(go.get_position(), "death_fx")
-			particlefx.play("/level/death_fx#death")
+			particlefx.play("level:/death_fx#death")
 			play_animation(self, hash("death"))
 			msg.post("#collisionobject", "disable")
 			go.animate(".", "euler.z", go.PLAYBACK_ONCE_FORWARD, 160, go.EASING_LINEAR, 0.7)
-			go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD, go.get_position().y - 200, go.EASING_INSINE, 0.5, 0.2, 
+			go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD, go.get_position().y - 200, go.EASING_INSINE, 0.5, 0.2,
 			function()
 				msg.post("controller#controller", "reset")
 			end)
 		elseif message.group == hash("geometry") then
 			handle_geometry_contact(self, message.normal, message.distance)
 		elseif message.group == hash("pickup") then
-			msg.post("/level/score#score", "add_score")
+			msg.post("level:/score#score", "add_score")
 		end
 
 	end
