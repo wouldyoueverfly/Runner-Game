@@ -1,0 +1,6 @@
+
+function init(self)
+	local pos = go.get_position()
+	go.animate(go.get_id(), "position.y", go.PLAYBACK_LOOP_PINGPONG, pos.y + 24, go.EASING_INOUTSINE, 0.75, 1)
+	go.set("#sprite", "blink_effect_trigger", vmath.vector4(0))
+end

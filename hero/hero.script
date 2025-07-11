@@ -1,10 +1,5 @@
---@diagnostic disable:  undefined-global, undefined-field
-
 local gravity = -20
 local jump_takeoff_speed = 900
-local timer_enabled = true
-local frequency = 1.2
-local reset_timer = 1 / frequency
 
 function init(self)
 	msg.post(".", "acquire_input_focus")
@@ -34,26 +29,6 @@ local function update_animation(self)
 end
 
 function update(self, dt)
-
-	if timer_enabled then
-		reset_timer = reset_timer - dt
-	end
-	if reset_timer < 0 then
-		
-		msg.post("level:/score#score", "reset_score")
-		self.velocity = vmath.vector3(0,0,0)
-		self.correction = vmath.vector3()
-		self.ground_contact = false
-		self.anim = nil
-		go.set(".", "euler.z", 0)
-		go.set_position(self.position)
-		msg.post("#collisionobject", "enable")
-		
-		reset_timer = 1 / frequency
-		timer_enabled = false
-	end
-
-	if not timer_enabled then
 		local gravity = vmath.vector3(0, gravity, 0)
 
 		if not self.ground_contact then
@@ -66,7 +41,6 @@ function update(self, dt)
 
 		self.correction = vmath.vector3()
 		self.ground_contact = false
-	end
 end
 
 local function handle_geometry_contact(self, normal, distance)
@@ -86,7 +60,16 @@ end
 function on_message(self, message_id, message, sender)
 	
 	if message_id == hash("reset") then
-		timer_enabled = true
+		
+		msg.post("level:/score#score", "reset_score")
+		self.velocity = vmath.vector3(0,0,0)
+		self.correction = vmath.vector3()
+		self.ground_contact = false
+		self.anim = nil
+		go.set(".", "euler.z", 0)
+		go.set_position(self.position)
+		msg.post("#collisionobject", "enable")
+		
 	elseif message_id == hash("contact_point_response") then
 		
 		if message.group == hash("danger") then
@@ -94,11 +77,11 @@ function on_message(self, message_id, message, sender)
 			particlefx.play("level:/death_fx#death")
 			play_animation(self, hash("death"))
 			msg.post("#collisionobject", "disable")
-			go.animate(".", "euler.z", go.PLAYBACK_ONCE_FORWARD, 160, go.EASING_LINEAR, 0.7)
-			go.animate(".", "position.y", go.PLAYBACK_ONCE_FORWARD, go.get_position().y - 200, go.EASING_INSINE, 0.5, 0.2,
-			function()
+			
+			timer.delay(1, false, function()
 				msg.post("controller#controller", "reset")
 			end)
+			
 		elseif message.group == hash("geometry") then
 			handle_geometry_contact(self, message.normal, message.distance)
 		elseif message.group == hash("pickup") then

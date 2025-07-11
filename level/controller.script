@@ -2,6 +2,7 @@ go.property("speed", 360)
 local grid = 460
 local platform_heights = { 100, 200, 330 }
 local coins = 3
+local last_heart_sprite = ""
 
 function init(self)
 	msg.post("ground/controller#ground", "set_speed", { speed = self.speed })
@@ -35,16 +36,39 @@ function update(self, dt)
 	end
 end
 
+local function remove_life(self)
+	
+	local last = #self.lives
+	if last ~= 0 then
+
+		local heart_url = msg.url(nil, self.lives[last], "sprite")
+
+		if last_heart_sprite == "" then
+			last_heart_sprite = heart_url
+		end
+
+		timer.delay(1, true, function()
+			go.set(heart_url, "blink_effect_trigger", vmath.vector4(1))
+			
+			timer.delay(0.1, false, function()
+				go.set(heart_url, "blink_effect_trigger", vmath.vector4(0))
+			end)
+		end)
+		if last_heart_sprite ~= heart_url then
+			msg.post(last_heart_sprite, "disable")
+			last_heart_sprite = heart_url
+		end
+		table.remove(self.lives, last)
+	else
+		msg.post("main:/loader#loader", "game_over")
+	end
+	
+end
+
 function on_message(self, message_id, message, sender)
 	if message_id == hash("reset") then
-		local last = #self.lives
-		if last ~= 0 then
-			local heart_url = msg.url(nil, self.lives[last], "sprite")
-			msg.post(heart_url, "disable")
-			table.remove(self.lives, last)
-		else
-			msg.post("main:/loader#loader", "game_over")
-		end
+
+		remove_life(self)
 		
 		for i,p in ipairs(self.spawns) do
 			go.delete(p)
